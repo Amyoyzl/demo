@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>amy authorization demo</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <style>
+    #app{
+      width: 300px;
+      height: 250px;
+      padding: 30px;
+      background: #efefef;
+      margin: 150px auto;
+    }
+    h4{
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h4>User information</h4>
+    <span>name: &nbsp;&nbsp;&nbsp;&nbsp;{{ user.userName }}</span><br><br>
+    <span>phone: &nbsp;&nbsp;&nbsp;&nbsp;{{ user.phone }}</span><br><br>
+    <span>address: &nbsp;&nbsp;&nbsp;&nbsp;{{ user.address }}</span><br><br>
+    <span>company: &nbsp;&nbsp;&nbsp;&nbsp;{{ user.company }}</span><br><br>
+  </div>
+  <script>
+      new Vue({
+          el: '#app',
+          data: {
+              user: null
+          },
+          mounted: function () {
+              axios.get('http://client.server.com:8080/user').then(res =>{
+                  this.user = res.data.attributes;
+              })
+          }
+      })
+  </script>
+</body>
+</html>
